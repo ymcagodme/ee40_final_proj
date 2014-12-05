@@ -1,7 +1,7 @@
 #define trigPin 12
 #define echoPin 13
-#define leftMotor 14
-#define rightMotor 2
+#define leftMotor 15
+#define rightMotor 11
 #define leftPhoto 4
 #define rightPhoto 6
 
@@ -21,24 +21,27 @@ void setup() {
   pinMode(leftMotor, OUTPUT);
   pinMode(rightMotor, OUTPUT);
   
-  pinMode(leftPhoto, INPUT);
-  pinMode(rightPhoto, INPUT);
+//  pinMode(leftPhoto, INPUT);
+//  pinMode(rightPhoto, INPUT);
+  
   
   motorSwitch(0, 0);
 }
 
 void loop() {
-  int leftPhotoVal = digitalRead(leftPhoto);
-  int rightPhotoVal = digitalRead(rightPhoto);
-  Serial.println("left value");
-  Serial.println(leftPhotoVal);
-  Serial.println("right value");
-  Serial.println(rightPhotoVal);
-  
+//  int leftPhotoVal = digitalRead(leftPhoto);
+//  int rightPhotoVal = digitalRead(rightPhoto);
+//  Serial.println("left value");
+//  Serial.println(leftPhotoVal);
+//  Serial.println("right value");
+//  Serial.println(rightPhotoVal);
+//  
   
   // int freq;
   float distance = calDistance();
-
+  digitalWrite(r, LOW);
+  digitalWrite(g, LOW);
+  
   if (distance <= 5) {
     motorSwitch(0, 0);
     setROn();
@@ -46,13 +49,12 @@ void loop() {
   }
   else if (distance <= threshold) {
     doBlink();
-    doTurn();
-    delay(turnDelay);
+//    doTurn();
   }
   else {
     setGOn();
     setROff();
-    motorSwitch(leftPhotoVal, rightPhotoVal);
+    motorSwitch(1, 1);
   }
   
   delay(100);
@@ -77,7 +79,6 @@ void doTurn() {
   motorSwitch(0, 0);
   delay(turnDelay);
   motorSwitch(1, 0);
-  motorSwitch(1, 1);
 }
 
 void motorSwitch(int v1, int v2) {
