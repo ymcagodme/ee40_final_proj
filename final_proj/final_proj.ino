@@ -21,44 +21,44 @@ void setup() {
   pinMode(leftMotor, OUTPUT);
   pinMode(rightMotor, OUTPUT);
   
-//  pinMode(leftPhoto, INPUT);
-//  pinMode(rightPhoto, INPUT);
+  pinMode(leftPhoto, INPUT);
+  pinMode(rightPhoto, INPUT);
   
   
   motorSwitch(0, 0);
 }
 
 void loop() {
-//  int leftPhotoVal = digitalRead(leftPhoto);
-//  int rightPhotoVal = digitalRead(rightPhoto);
-//  Serial.println("left value");
-//  Serial.println(leftPhotoVal);
-//  Serial.println("right value");
-//  Serial.println(rightPhotoVal);
+  int leftPhotoVal = analogRead(leftPhoto);
+  int rightPhotoVal = analogRead(rightPhoto);
+  Serial.print("left value");
+  Serial.println(leftPhotoVal);
+  Serial.print("right value");
+  Serial.println(rightPhotoVal);
+  
+  
+//  // int freq;
+//  float distance = 0.0;
+//  distance = calDistance();
+  
+//  if (distance <= 5) {
+////    motorSwitch(0, 0);
+//    digitalWrite(leftMotor, LOW);
+//    digitalWrite(rightMotor, LOW);    
+//    setROn();
+//    setGOff();
+//  }
+//  else if (distance <= threshold) {
+//    doTurn();
+//  }
+//  else {
+//    setGOn();
+//    setROff();
+////    motorSwitch(1, 1);
+//    digitalWrite(leftMotor, HIGH);
+//    digitalWrite(rightMotor, HIGH);
+//  }
 //  
-  
-  // int freq;
-  float distance = 0.0;
-  distance = calDistance();
-  
-  if (distance <= 5) {
-//    motorSwitch(0, 0);
-    digitalWrite(leftMotor, LOW);
-    digitalWrite(rightMotor, LOW);    
-    setROn();
-    setGOff();
-  }
-  else if (distance <= threshold) {
-    doTurn();
-  }
-  else {
-    setGOn();
-    setROff();
-//    motorSwitch(1, 1);
-    digitalWrite(leftMotor, HIGH);
-    digitalWrite(rightMotor, HIGH);
-  }
-  
   delay(100);
   
 }
