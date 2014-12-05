@@ -39,8 +39,6 @@ void loop() {
   
   // int freq;
   float distance = calDistance();
-  digitalWrite(r, LOW);
-  digitalWrite(g, LOW);
   
   if (distance <= 5) {
     motorSwitch(0, 0);
@@ -48,13 +46,14 @@ void loop() {
     setGOff();
   }
   else if (distance <= threshold) {
-    doBlink();
     doTurn();
   }
   else {
     setGOn();
     setROff();
-    motorSwitch(1, 1);
+//    motorSwitch(1, 1);
+    digitalWrite(leftMotor, HIGH);
+    digitalWrite(rightMotor, HIGH);
   }
   
   delay(100);
@@ -76,9 +75,12 @@ float calDistance() {
 }
 
 void doTurn() {
+  setROff();
   motorSwitch(0, 0);
-  motorSwitch(1, 0);
+  setGOn();
   delay(turnDelay);
+  setGOff();
+  motorSwitch(1, 0);
 }
 
 void motorSwitch(int v1, int v2) {
