@@ -71,8 +71,9 @@ float calDistance() {
 }
 
 void doTurn() {
-  digitalWrite(leftMotor, LOW);
+  motorSwitch(0, 0);
   delay(turnDelay);
+  motorSwitch(1, 0);
   motorSwitch(1, 1);
 }
 
