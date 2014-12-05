@@ -1,2 +1,2 @@
-ee40_final_proj
+EE40 Final Project
 ===============
