@@ -49,7 +49,7 @@ void loop() {
   }
   else if (distance <= threshold) {
     doBlink();
-//    doTurn();
+    doTurn();
   }
   else {
     setGOn();
@@ -77,8 +77,8 @@ float calDistance() {
 
 void doTurn() {
   motorSwitch(0, 0);
-  delay(turnDelay);
   motorSwitch(1, 0);
+  delay(turnDelay);
 }
 
 void motorSwitch(int v1, int v2) {
