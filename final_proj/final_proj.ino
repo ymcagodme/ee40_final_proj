@@ -10,31 +10,35 @@ int r = RED_LED;
 int t = 200;
 int turnDelay = 3000;
 int threshold = 20;
+int cycle = 500;
 
 void setup() {
   Serial.begin (9600);
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
-  pinMode(g, OUTPUT);
-  pinMode(r, OUTPUT);
+//  pinMode(trigPin, OUTPUT);
+//  pinMode(echoPin, INPUT);
+//  pinMode(g, OUTPUT);
+//  pinMode(r, OUTPUT);
+//  
+//  pinMode(leftMotor, OUTPUT);
+//  pinMode(rightMotor, OUTPUT);
+//  
+//  pinMode(leftPhoto, INPUT);
+//  pinMode(rightPhoto, INPUT);
   
-  pinMode(leftMotor, OUTPUT);
-  pinMode(rightMotor, OUTPUT);
   
-  pinMode(leftPhoto, INPUT);
-  pinMode(rightPhoto, INPUT);
-  
-  
-  motorSwitch(0, 0);
+//  motorSwitch(0, 0);
 }
 
 void loop() {
-  int leftPhotoVal = analogRead(leftPhoto);
-  int rightPhotoVal = analogRead(rightPhoto);
-  Serial.print("left value");
+  int leftPhotoVal = 0;
+  leftPhotoVal = analogRead(leftPhoto);
+  int rightPhotoVal = 0;
+  rightPhotoVal = analogRead(rightPhoto);
+  Serial.print("left value:  ");
   Serial.println(leftPhotoVal);
-  Serial.print("right value");
+  Serial.print("right value: ");
   Serial.println(rightPhotoVal);
+  Serial.println();
   
   
 //  // int freq;
@@ -59,7 +63,7 @@ void loop() {
 //    digitalWrite(rightMotor, HIGH);
 //  }
 //  
-  delay(100);
+  delay(cycle);
   
 }
 
