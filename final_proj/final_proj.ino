@@ -9,6 +9,7 @@ int g = GREEN_LED;
 int r = RED_LED;
 int t = 200;
 int turnDelay = 3000;
+int threshold = 20;
 
 void setup() {
   Serial.begin (9600);
@@ -38,18 +39,20 @@ void loop() {
   // int freq;
   float distance = calDistance();
 
-
-  if (distance >= 80) {
+  if (distance <= 5) {
+    motorSwitch(0, 0);
+    setROn();
+    setGOff();
+  }
+  else if (distance <= threshold) {
+    doBlink();
+    doTurn();
+    delay(turnDelay);
+  }
+  else {
     setGOn();
     setROff();
     motorSwitch(leftPhotoVal, rightPhotoVal);
-//    turnOnMotor();
-  }
-  else {
-    setROn();
-    setGOff();
-    doTurn();
-    delay(turnDelay);
   }
   
   delay(100);
@@ -65,7 +68,7 @@ float calDistance() {
   digitalWrite(trigPin, LOW);
   duration = pulseIn(echoPin, HIGH);
   float distance = duration / 29 / 2;
-  Serial.println(distance);
+  Serial.print(distance);
   Serial.println(" cm");
   return distance;
 }
