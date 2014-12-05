@@ -7,62 +7,57 @@
 
 int g = GREEN_LED;
 int r = RED_LED;
-int t = 200;
-int turnDelay = 3000;
+int turnDelay = 1000;
 int threshold = 20;
-int cycle = 500;
+int cycle = 100;
 
 void setup() {
   Serial.begin (9600);
-//  pinMode(trigPin, OUTPUT);
-//  pinMode(echoPin, INPUT);
-//  pinMode(g, OUTPUT);
-//  pinMode(r, OUTPUT);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(g, OUTPUT);
+  pinMode(r, OUTPUT);
 //  
-//  pinMode(leftMotor, OUTPUT);
-//  pinMode(rightMotor, OUTPUT);
+  pinMode(leftMotor, OUTPUT);
+  pinMode(rightMotor, OUTPUT);
 //  
 //  pinMode(leftPhoto, INPUT);
 //  pinMode(rightPhoto, INPUT);
   
   
-//  motorSwitch(0, 0);
+  motorSwitch(0, 0);
 }
 
 void loop() {
-  int leftPhotoVal = 0;
-  leftPhotoVal = analogRead(leftPhoto);
-  int rightPhotoVal = 0;
-  rightPhotoVal = analogRead(rightPhoto);
-  Serial.print("left value:  ");
-  Serial.println(leftPhotoVal);
-  Serial.print("right value: ");
-  Serial.println(rightPhotoVal);
-  Serial.println();
-  
+//  int leftPhotoVal = 0;
+//  leftPhotoVal = analogRead(leftPhoto);
+//  int rightPhotoVal = 0;
+//  rightPhotoVal = analogRead(rightPhoto);
+//  Serial.print("left value:  ");
+//  Serial.println(leftPhotoVal);
+//  Serial.print("right value: ");
+//  Serial.println(rightPhotoVal);
+//  Serial.println();
+//  
   
 //  // int freq;
-//  float distance = 0.0;
-//  distance = calDistance();
+  float distance = 0.0;
+  distance = calDistance();
   
-//  if (distance <= 5) {
-////    motorSwitch(0, 0);
-//    digitalWrite(leftMotor, LOW);
-//    digitalWrite(rightMotor, LOW);    
-//    setROn();
-//    setGOff();
-//  }
-//  else if (distance <= threshold) {
-//    doTurn();
-//  }
-//  else {
-//    setGOn();
-//    setROff();
-////    motorSwitch(1, 1);
-//    digitalWrite(leftMotor, HIGH);
-//    digitalWrite(rightMotor, HIGH);
-//  }
-//  
+  if (distance <= 10) {
+    motorSwitch(LOW, LOW);
+    setROn();
+    setGOff();
+  }
+  else if (distance <= threshold) {
+    doTurn();
+  }
+  else {
+    setGOn();
+    setROff();
+    motorSwitch(HIGH, HIGH);
+  }
+  
   delay(cycle);
   
 }
@@ -82,12 +77,13 @@ float calDistance() {
 }
 
 void doTurn() {
+  Serial.println("Turning...");
   setROff();
   motorSwitch(0, 0);
   setGOn();
-  delay(turnDelay);
+  delay(12);
   setGOff();
-  motorSwitch(1, 0);
+  motorSwitch(0, 1);
   delay(turnDelay);
 }
 
@@ -98,9 +94,9 @@ void motorSwitch(int v1, int v2) {
 
 void doBlink() {
   digitalWrite(g, HIGH);
-  delay(t);
+  delay(cycle);
   digitalWrite(g, LOW);
-  delay(t);
+  delay(cycle);
 }
 
 void setGOn() {
