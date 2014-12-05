@@ -20,19 +20,19 @@ void setup() {
   pinMode(leftMotor, OUTPUT);
   pinMode(rightMotor, OUTPUT);
   
-//  pinMode(leftPhoto, INPUT);
-//  pinMode(rightPhoto, INPUT);
+  pinMode(leftPhoto, INPUT);
+  pinMode(rightPhoto, INPUT);
   
-  turnOffMotor();
+  motorSwitch(0, 0);
 }
 
 void loop() {
-//  int leftPhotoVal = digitalRead(leftPhoto);
-//  int rightPhotoVal = digitalRead(rightPhoto);
-//  Serial.println("left value");
-//  Serial.println(leftPhotoVal);
-//  Serial.println("right value");
-//  Serial.println(rightPhotoVal);  
+  int leftPhotoVal = digitalRead(leftPhoto);
+  int rightPhotoVal = digitalRead(rightPhoto);
+  Serial.println("left value");
+  Serial.println(leftPhotoVal);
+  Serial.println("right value");
+  Serial.println(rightPhotoVal);
   
   
   // int freq;
@@ -42,7 +42,8 @@ void loop() {
   if (distance >= 80) {
     setGOn();
     setROff();
-    turnOnMotor();
+    motorSwitch(leftPhotoVal, rightPhotoVal);
+//    turnOnMotor();
   }
   else {
     setROn();
@@ -50,8 +51,6 @@ void loop() {
     doTurn();
     delay(turnDelay);
   }
-  
-
   
   delay(100);
   
@@ -74,17 +73,12 @@ float calDistance() {
 void doTurn() {
   digitalWrite(leftMotor, LOW);
   delay(turnDelay);
-  turnOnMotor();
+  motorSwitch(1, 1);
 }
 
-void turnOnMotor() {
-  digitalWrite(leftMotor, HIGH);
-  digitalWrite(rightMotor, HIGH);
-}
-
-void turnOffMotor() {
-  digitalWrite(leftMotor, LOW);
-  digitalWrite(rightMotor, LOW);
+void motorSwitch(int v1, int v2) {
+  digitalWrite(leftMotor, v1);
+  digitalWrite(rightMotor, v2);
 }
 
 void doBlink() {
